@@ -1,4 +1,4 @@
-
+# Cursors (and use exceptions if needed)
 
 ## Q1) Create plsql block  to check for all employees using cursor and update their commission_pct based on the salary:
 ```
