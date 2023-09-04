@@ -59,3 +59,37 @@ END LOOP;
 END;
 ```
 
+## Q3) Create plsql block using cursor to print last name, department name, city, country name for all employees employee ( without using join | sub query )
+
+```sql
+set serveroutput on size 1000000
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT * FROM employees WHERE department_id IS NOT NULL;
+v_department_name DEPARTMENTS.department_name%type;
+v_location_id LOCATIONS.location_id%type;
+v_city LOCATIONS.city%type;
+v_country_id COUNTRIES.country_id%type;
+v_country_name COUNTRIES.country_name%type;
+BEGIN
+    FOR employee_record IN emp_cursor LOOP
+        SELECT department_name, location_id INTO v_department_name, v_location_id FROM departments WHERE department_id = employee_record.department_id;
+        SELECT city, country_id INTO v_city, v_country_id FROM locations WHERE location_id = v_location_id;
+        SELECT country_name INTO v_country_name FROM countries WHERE country_id = v_country_id;
+        dbms_output.put_line(employee_record.last_name||' '|| v_department_name||' '||v_city||' '||v_country_name);
+    END LOOP;
+END;
+```
+
+## Q4)	Create plsql block that loop over employees table and increase only those working in ‘IT’ department by 10% of their salary. 
+
+```sql
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT * FROM employees WHERE department_id = (SELECT department_id from departments WHERE department_name = 'IT');
+BEGIN
+    FOR emp_record IN emp_cursor LOOP
+        UPDATE employees SET salary = salary + (salary * 0.1) WHERE employee_id = emp_record.employee_id;  
+    END LOOP;
+END;
+```
