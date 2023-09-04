@@ -138,7 +138,7 @@ Department name = Oracle Dept
 Manager id = 103
 Location Id = 17
 
-** Handle exception as needed
+** Handle exceptions as needed
 ```
 
 ```sql
