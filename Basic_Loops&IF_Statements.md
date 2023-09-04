@@ -11,9 +11,9 @@ Solution:
 
 ```sql
 DECLARE
-v_id EMPLOYEES.EMPLOYEE_ID%type := 105;
-v_comm EMPLOYEES.COMMISSION_PCT%type;
-v_salary EMPLOYEES.SALARY%type;
+    v_id EMPLOYEES.EMPLOYEE_ID%type := 105;
+    v_comm EMPLOYEES.COMMISSION_PCT%type;
+    v_salary EMPLOYEES.SALARY%type;
 BEGIN
     SELECT SALARY
     INTO v_salary
@@ -39,13 +39,13 @@ END;
 
 ```sql
 DECLARE
-v_working_months NUMBER(5);
-v_hire_date DATE;
-v_salary EMPLOYEES.SALARY%type;
-v_retired_sal EMPLOYEES.SALARY%type;
-v_min NUMBER(4);
-v_max NUMBER(4);
-v_count NUMBER(4);
+    v_working_months NUMBER(5);
+    v_hire_date DATE;
+    v_salary EMPLOYEES.SALARY%type;
+    v_retired_sal EMPLOYEES.SALARY%type;
+    v_min NUMBER(4);
+    v_max NUMBER(4);
+    v_count NUMBER(4);
 BEGIN
     SELECT MIN(employee_id), MAX(employee_id) 
     INTO v_min, v_max 
@@ -69,14 +69,14 @@ END;
 
 ```sql
 DECLARE
-v_id EMPLOYEES.EMPLOYEE_ID%type := 105;
-v_last_name EMPLOYEES.LAST_NAME%type;
-v_department_id DEPARTMENTS.DEPARTMENT_ID%type;
-v_dept_name DEPARTMENTS.DEPARTMENT_NAME%type;
-v_location_id LOCATIONS.LOCATION_ID%type;
-v_country_id COUNTRIES.COUNTRY_ID%type;
-v_country_name COUNTRIES.COUNTRY_NAME%type;
-v_city LOCATIONS.CITY%type;
+    v_id EMPLOYEES.EMPLOYEE_ID%type := 105;
+    v_last_name EMPLOYEES.LAST_NAME%type;
+    v_department_id DEPARTMENTS.DEPARTMENT_ID%type;
+    v_dept_name DEPARTMENTS.DEPARTMENT_NAME%type;
+    v_location_id LOCATIONS.LOCATION_ID%type;
+    v_country_id COUNTRIES.COUNTRY_ID%type;
+    v_country_name COUNTRIES.COUNTRY_NAME%type;
+    v_city LOCATIONS.CITY%type;
 BEGIN
     SELECT last_name, DEPARTMENT_ID
     INTO v_last_name, v_department_id
@@ -105,12 +105,11 @@ END;
 ## Q4) 4.	Create plsql block that loop over employees table and increase only those working in ‘IT’ department by 10% of their salary
 ```sql
 DECLARE
-v_min NUMBER(4);
-v_max NUMBER(4);
-v_count NUMBER(4);
-v_salary NUMBER(8, 2);
-v_dept_id NUMBER(4);
-
+    v_min NUMBER(4);
+    v_max NUMBER(4);
+    v_count NUMBER(4);
+    v_salary NUMBER(8, 2);
+    v_dept_id NUMBER(4);
 BEGIN
 SELECT MIN(employee_id), MAX(employee_id)
 INTO v_min, v_max
@@ -132,24 +131,23 @@ END;
 ## Q5) Create empty table employees_again and use loop to insert only employees whose job_id = ‘SA_REP’ to the new table with double salary [ salary * 2 ]
 ```sql
 DECLARE
-v_count NUMBER(5);
-v_counter NUMBER(5);
-v_min NUMBER(4);
-v_max NUMBER(4);
- v_salary EMPLOYEES.SALARY%type;
-v_phone_number EMPLOYEES.PHONE_NUMBER%type;
-v_manager_id EMPLOYEES.MANAGER_ID%type;
-v_first_name EMPLOYEES.FIRST_NAME%type;
-v_last_name EMPLOYEES.LAST_NAME%type;
-v_job_id EMPLOYEES.JOB_ID%type;
-v_hire_date EMPLOYEES.HIRE_DATE%type;
-v_employee_id EMPLOYEES.EMPLOYEE_ID%type;
-v_email EMPLOYEES.EMAIL%type;
-v_department_id DEPARTMENTS.DEPARTMENT_ID%type := 80;
-v_comm EMPLOYEES.COMMISSION_PCT%type;
+    v_count NUMBER(5);
+    v_counter NUMBER(5);
+    v_min NUMBER(4);
+    v_max NUMBER(4);
+     v_salary EMPLOYEES.SALARY%type;
+    v_phone_number EMPLOYEES.PHONE_NUMBER%type;
+    v_manager_id EMPLOYEES.MANAGER_ID%type;
+    v_first_name EMPLOYEES.FIRST_NAME%type;
+    v_last_name EMPLOYEES.LAST_NAME%type;
+    v_job_id EMPLOYEES.JOB_ID%type;
+    v_hire_date EMPLOYEES.HIRE_DATE%type;
+    v_employee_id EMPLOYEES.EMPLOYEE_ID%type;
+    v_email EMPLOYEES.EMAIL%type;
+    v_department_id DEPARTMENTS.DEPARTMENT_ID%type := 80;
+    v_comm EMPLOYEES.COMMISSION_PCT%type;
 BEGIN
    SELECT COUNT(*) INTO v_count FROM user_tables WHERE table_name = 'EMPLOYEES_AGAIN';
-
    IF v_count = 1 THEN
       EXECUTE IMMEDIATE 'TRUNCATE TABLE employees_again';
    ELSE
@@ -176,11 +174,11 @@ END;
 ## Q6) Use loop to loop over departments and print dept_id, dept_name
 ```sql
 DECLARE
-v_min NUMBER(4);
-v_max NUMBER(4);
-v_dept_id NUMBER(4);
-v_dept_name VARCHAR2(100);
-v_counter NUMBER(4);
+    v_min NUMBER(4);
+    v_max NUMBER(4);
+    v_dept_id NUMBER(4);
+    v_dept_name VARCHAR2(100);
+    v_counter NUMBER(4);
 BEGIN
 SELECT MIN(department_id), MAX(department_id)
 INTO v_min, v_max
