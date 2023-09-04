@@ -36,7 +36,7 @@ Retired bonus = no of working months * 10 % of his current salary
 
 ```sql
 DECLARE
-v_count NUMBER(4);
+  v_count NUMBER(4);
 BEGIN
 
 SELECT COUNT(*) INTO v_count FROM ALL_TAB_COLUMNS  WHERE TABLE_NAME= 'EMPLOYEES' AND COLUMN_NAME = 'RETIRED_BONUS';
