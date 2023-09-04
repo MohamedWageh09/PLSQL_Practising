@@ -130,3 +130,30 @@ BEGIN
     END LOOP;
 END;
 ```
+
+## Q7) Create plsql block that insert new Departments with the following data:
+```
+Department_id = 350
+Department name = Oracle Dept
+Manager id = 103
+Location Id = 17
+
+** Handle exception as needed
+```
+
+```sql
+set serveroutput on size 1000000
+DECLARE
+    key_violated exception;
+    pragma exception_init(key_violated, -02291);
+BEGIN
+    INSERT INTO departments(DEPARTMENT_ID, DEPARTMENT_NAME, LOCATION_ID, MANAGER_ID)
+        VALUES(350, 'Oracle Dept', 17, 103);
+        
+    EXCEPTION
+        WHEN key_violated THEN
+            dbms_output.put_line('foregin key violated');
+        WHEN others THEN
+            dbms_output.put_line('please check the script');
+END;
+```
