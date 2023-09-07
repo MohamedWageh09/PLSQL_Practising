@@ -1,0 +1,1 @@
+## 1) Create and invoke the Query_loc Function to display the data for a certain region from Locations, Countries, regions tables in the following format" Region Name , Country Name , LOCATION_ID  , STREET_ADDRESS  , POSTAL_CODE , CITY" Pass Location ID as an input parameter
