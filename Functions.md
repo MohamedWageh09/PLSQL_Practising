@@ -89,7 +89,7 @@ BEGIN
     dbms_output.put_line('City: '||v_city);
 END;
 ````
-## 3) Create a function called GET_ANNUAL_COMP to return the annual salary computed from an employee’s monthly salary and commission passed as parameters.  Use the following basic formula to calculate the annual salary:  (Salary*12) + (commission_pct*salary*12)
+## 3) Create a function called GET_ANNUAL_COMP to return the annual salary computed from an employee’s monthly salary and commission passed as parameters.  Use the following basic formula to calculate the annual salary:  (Salary * 12) + (commission_pct * salary * 12)
 - Use the function in a SELECT statement
 ````sql
 CREATE FUNCTION get_annual_comp(v_salary number, v_comm number)
@@ -100,8 +100,12 @@ BEGIN
 END;
 show errors
 ````
-#### Calling:
+#### Calling in SQL:
 ````sql
 SELECT employee_id, get_annual_comp(salary, COALESCE(commission_pct, 0))
 FROM employees;
 ````
+#### NOTE: to call a created function in SQL you need to make sure that:
+- function does not contain dmls( insert - update - delete ) on the same table .
+- function does not contain plsql data types ( boolean - plsql records ).
+- function does not contain out , in out parameter modes (returns more than 1 value).
