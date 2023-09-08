@@ -1,4 +1,27 @@
-## 1) Create and invoke the Query_loc Function to display the data for a certain region from Locations, Countries, regions tables in the following format" Region Name , Country Name , LOCATION_ID  , STREET_ADDRESS  , POSTAL_CODE , CITY" Pass Location ID as an input parameter
+## 1) Create a function to convert dates to a given format.
+
+````sql
+CREATE OR REPLACE FUNCTION ConvertDateFormat(date_value date, "format" varchar2) RETURN varchar2
+IS
+    converted_date varchar2(255);
+BEGIN
+    converted_date := TO_CHAR(date_value, "format");
+    RETURN converted_date;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20004, 'Error while converting date');
+END;
+show errors
+````
+#### Test
+````sql
+SELECT first_name, ConvertDateFormat(hire_date, 'yyyy-dd-mm')
+FROM employees;
+````
+![image](https://github.com/MohamedWageh09/PLSQL_Practising/assets/120044385/1e2a634f-d9ef-4e7d-bf8a-892fa0c68057)
+
+
+## 2) Create and invoke the Query_loc Function to display the data for a certain region from Locations, Countries, regions tables in the following format" Region Name , Country Name , LOCATION_ID  , STREET_ADDRESS  , POSTAL_CODE , CITY" Pass Location ID as an input parameter
 
 ````sql
 CREATE OR REPLACE FUNCTION query_loc(v_loc_id number)
@@ -50,7 +73,7 @@ BEGIN
 END;
 ````
 
-## 2) Create and invoke the GET_LOC function to return the street address, city for a specified LOCATION_ID.
+## 3) Create and invoke the GET_LOC function to return the street address, city for a specified LOCATION_ID.
 
 ````sql
 CREATE OR REPLACE FUNCTION get_loc(v_STREET_ADDRESS OUT varchar2,  v_CITY OUT varchar2, v_loc_id number)
@@ -89,7 +112,7 @@ BEGIN
     dbms_output.put_line('City: '||v_city);
 END;
 ````
-## 3) Create a function called GET_ANNUAL_COMP to return the annual salary computed from an employee’s monthly salary and commission passed as parameters.  Use the following basic formula to calculate the annual salary:  (Salary * 12) + (commission_pct * salary * 12)
+## 4) Create a function called GET_ANNUAL_COMP to return the annual salary computed from an employee’s monthly salary and commission passed as parameters.  Use the following basic formula to calculate the annual salary:  (Salary * 12) + (commission_pct * salary * 12)
 - Use the function in a SELECT statement
 ````sql
 CREATE FUNCTION get_annual_comp(v_salary number, v_comm number)
@@ -109,3 +132,4 @@ FROM employees;
 - function does not contain dmls( insert - update - delete ) on the same table .
 - function does not contain plsql data types ( boolean - plsql records ).
 - function does not contain out , in out parameter modes (returns more than 1 value).
+
