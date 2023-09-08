@@ -128,6 +128,8 @@ show errors
 SELECT employee_id, get_annual_comp(salary, COALESCE(commission_pct, 0))
 FROM employees;
 ````
+![image](https://github.com/MohamedWageh09/PLSQL_Practising/assets/120044385/3097152c-2f4b-4fca-a071-59bcb5bee962)
+
 #### NOTE: to call a created function in SQL you need to make sure that:
 - function does not contain dmls( insert - update - delete ) on the same table .
 - function does not contain plsql data types ( boolean - plsql records ).
