@@ -193,5 +193,6 @@ BEGIN
     END LOOP; 
 END;
 ````
+![image](https://github.com/MohamedWageh09/PLSQL_Practising/assets/120044385/d6882ad4-f153-4072-b2fb-d7a2951aeb43)
 
 
