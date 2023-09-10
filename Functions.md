@@ -135,3 +135,63 @@ FROM employees;
 - function does not contain plsql data types ( boolean - plsql records ).
 - function does not contain out , in out parameter modes (returns more than 1 value).
 
+## Create CHECK_RETIRED FUNCTION that takes employee_id and the retirement years as inputs (EMP_ID NUMBER, MAX_HIRE_YEAR NUMBER) 
+- Add RETIRED NUMBER(1) column to employees table using alter
+- Create and call CHECK_RETIRED FUNCTION(V_EMP_ID NUMBER, V_MAX_HIRE_YEAR NUMBER)
+that will return 1 if employee has passed no of years >=  V_MAX_HIRE_YEAR, return 0 for otherwise
+- create anonymous block to update the emp with set retired = 1  if this employee will retired
+
+````sql
+CREATE OR REPLACE FUNCTION check_retired(emp_id number, max_years number)
+RETURN number
+IS
+    emp_record EMPLOYEES%rowtype;
+    total_working_years number;
+BEGIN
+    SELECT hire_date
+    INTO emp_record.hire_date
+    FROM employees
+    WHERE employee_id = emp_id;   
+    total_working_years := TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, emp_record.hire_date)) / 12);
+    IF total_working_years >= max_years THEN
+        RETURN 1;
+    ELSE
+        RETURN 0; 
+    END IF;
+
+END;
+show errors
+````
+
+````sql
+DECLARE
+    v_count number;
+
+BEGIN
+    SELECT COUNT(column_name) INTO v_count FROM all_tab_columns WHERE column_name = 'RETIRED';
+    IF v_count = 0 THEN
+        EXECUTE IMMEDIATE 'ALTER TABLE EMPLOYEES ADD RETIRED number(1)';
+    END IF;
+END;
+
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT * FROM employees;
+    max_years number := 18;
+    v_retirement number;
+BEGIN
+    FOR emp_record IN emp_cursor LOOP
+        SELECT check_retired(emp_record.employee_id, max_years)
+            INTO v_retirement
+            FROM EMPLOYEES
+            WHERE employee_id = emp_record.employee_id;
+    IF v_retirement = 1 THEN
+        UPDATE employees 
+        SET retired = 1
+        WHERE employee_id = emp_record.employee_id; 
+    END IF;   
+    END LOOP; 
+END;
+````
+
+
